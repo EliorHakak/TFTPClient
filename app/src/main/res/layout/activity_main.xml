@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/check"
+        android:gravity="center_horizontal"
+        android:text="TFTP \n Send"
+        android:textSize="50dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.polyak.iconswitch.IconSwitch
+        android:id="@+id/iconSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:isw_active_tint_icon_left="#000"
+        app:isw_active_tint_icon_right="#000"
+        app:isw_background_color="#2196F3"
+        app:isw_default_selection="left"
+        app:isw_icon_left="@drawable/send"
+        app:isw_icon_right="@drawable/recive"
+        app:isw_icon_size="50dp"
+        android:layout_marginTop="20dp"
+        app:isw_inactive_tint_icon_left="#000"
+        app:isw_inactive_tint_icon_right="#100A0A"
+        app:isw_thumb_color_left="#FFC107"
+        app:isw_thumb_color_right="#FFC107"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            app:lottie_rawRes="@raw/send"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iconSwitch"/>
+
+
+        <com.libizo.CustomEditText
+        android:id="@+id/ipaddress"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:hint="Server Ip Address"
+        android:inputType="text"
+        app:libIZO_setBorderView="true"
+        app:libIZO_setClearIconVisible="true"
+        app:libIZO_setCornerRadius="23dp"
+        app:libIZO_setStrokeWidth="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loading"/>
+
+    <com.libizo.CustomEditText
+        android:id="@+id/filename"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="File Name"
+        android:inputType="text"
+        app:libIZO_setBorderView="true"
+        app:libIZO_setClearIconVisible="true"
+        app:libIZO_setCornerRadius="23dp"
+        app:libIZO_setStrokeWidth="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ipaddress"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addfile"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_style"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text = "Add File"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/filename"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/selectedImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addfile"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_style"
+        app:layout_constraintTop_toBottomOf="@+id/selectedImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
