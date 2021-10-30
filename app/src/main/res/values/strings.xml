@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TFTPClient</string>
+    <string name="recive_button">Receive</string>
+    <string name="recive_header">TFTP \n Receive</string>
+    <string name="send_button">Send</string>
+    <string name="send_header">"TFTP \n Send"</string>
+
+
+
 </resources>
