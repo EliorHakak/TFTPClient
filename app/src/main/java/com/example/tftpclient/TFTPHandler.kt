@@ -18,9 +18,7 @@ const val CHOOSE_FILE_CODE = 22
 const val MODE_OCTET = "octet"
 const val MODE_ASCII = "netascii"
 
-class TFTPHandler {
-
-    private var instance: TFTPHandler? = null
+object TFTPHandler {
 
     private var sendFileDataStartPosition = 0
     private var sendFileDataEndPosition = 0
@@ -52,15 +50,6 @@ class TFTPHandler {
     private lateinit var bufferByteArray: ByteArray
     private lateinit var mOutDatagramPacket: DatagramPacket
     private lateinit var mInDatagramPacket: DatagramPacket
-
-
-    fun getInstance(): TFTPHandler? {
-        if (instance == null) {
-            instance = TFTPHandler()
-        }
-        return instance
-    }
-
 
     /******************************************
      **       Create WRQ or RRQ Request      **

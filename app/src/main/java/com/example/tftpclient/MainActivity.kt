@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                     mLottieLoadingAnim.visibility = View.VISIBLE
                     mImageToSend?.let {
                         //sendFileToServer(mFileName.text.toString(), mServerIpAddress?.text.toString(), MODE_OCTET)
-                        TFTPHandler().getInstance()?.sendFileToServer(mFileName.text.toString(),
+                        TFTPHandler.sendFileToServer(mFileName.text.toString(),
                             mServerIpAddress?.text.toString(),
                             MODE_OCTET,
                             it,
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                     mLottieLoadingAnim.visibility = View.VISIBLE
                     mSelectedImage.visibility = View.GONE
                     mSelectedImage.setImageBitmap(null)
-                    TFTPHandler().getInstance()?.getFileFromServer(mFileName.text.toString(),
+                    TFTPHandler.getFileFromServer(mFileName.text.toString(),
                         mServerIpAddress?.text.toString(),
                         MODE_OCTET,
                         success = { writeByte , isError ->
