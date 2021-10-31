@@ -106,8 +106,6 @@ object TFTPHandler {
         }
     }
 
-
-
     /*******************
      **       WRQ      **
      * ******************/
@@ -141,6 +139,7 @@ object TFTPHandler {
             //first 4 characters from mInDatagramPacket - 2 byte OpCode , 2 byte BlockNumber
             val opCode = byteArrayOf(bufferByteArray[0], bufferByteArray[1])
             if (opCode[1] == ERROR) {
+                stopThread()
                 error.invoke(bufferByteArray)
                 resetData()
             } else if (opCode[1] == ACK) {
@@ -153,6 +152,7 @@ object TFTPHandler {
         Log.d("SendFile","finish!!!: $block")
         mDatagramSocket?.close()
         resetData()
+        stopThread()
         success.invoke(bufferByteArray)
     }
 
@@ -210,8 +210,6 @@ object TFTPHandler {
         }
     }
 
-
-
     /*******************
      **       RRQ      **
      * ******************/
@@ -220,23 +218,20 @@ object TFTPHandler {
         mInetAddress = InetAddress.getByName(ipAddress)
         mDatagramSocket = DatagramSocket()
         mFirstrequestByteArray = createRequest(RRQ, fileName, mode)
-        mOutDatagramPacket = DatagramPacket(
-            mFirstrequestByteArray,
-            mFirstrequestByteArray.size,
-            mInetAddress,
-            TFTP_PORT
-        )
+        mOutDatagramPacket = DatagramPacket(mFirstrequestByteArray, mFirstrequestByteArray.size, mInetAddress, TFTP_PORT)
 
         //send RRQ request
         try {
             mDatagramSocket?.send(mOutDatagramPacket)
         } catch (e: IllegalArgumentException) {
+            stopThread()
             error.invoke(null)
             resetData()
         }
         //receive file from TFTP server
         Thread {
             val byteOutOS = receiveFile(error)
+            stopThread()
             //write file to local disc
             success.invoke(byteOutOS, isError)
             isError = false
@@ -259,6 +254,7 @@ object TFTPHandler {
             val opCode = byteArrayOf(bufferByteArray[0], bufferByteArray[1])
             if (opCode[1] == ERROR) {
                 isError = true
+                stopThread()
                 error.invoke(bufferByteArray)
                 resetData()
             } else if (opCode[1] == DATAPACKET) {
@@ -276,8 +272,6 @@ object TFTPHandler {
         return byteOutOS
     }
 
-
-
     private fun resetData() {
         sendFileDataStartPosition = 0
         sendFileDataEndPosition = 0
@@ -286,4 +280,7 @@ object TFTPHandler {
         isFirstTime = true
     }
 
+    private fun stopThread(){
+        Thread.currentThread().interrupt()
+    }
 }
